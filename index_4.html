@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2C1A0E">
+<meta name="description" content="더 팬트리 인공감미료 기준표 — 성분표에서 이 이름이 보이면 바로 확인하세요">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="팬트리 기준표">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>인공감미료 기준표 — THE PANTRY</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --brown:#2C1A0E;--brown2:#6B4C35;--gold:#C9A96E;--gold2:#E8D5B0;
+  --border:#DDD5C8;--text:#2C1A0E;--muted:#7A6655;
+  --bg:#F7F4EF;--bg2:#F2EDE6;--white:#FDFCFA;
+  --fail:#8B2A1A;--fail-bg:#F9EFED;
+  --cond:#7A5A1A;--cond-bg:#F9F3E6;
+  --ok:#2A5A3A;--ok-bg:#EBF3EE;
+  --best:#3A4A6B;--best-bg:#EDF0F7;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* HEADER */
+header{background:var(--brown);padding:52px 48px 44px;position:relative;overflow:hidden;}
+header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);}
+header::after{content:'THE PANTRY';position:absolute;right:-24px;bottom:-20px;font-family:'Noto Serif KR',serif;font-size:110px;font-weight:600;color:rgba(201,169,110,0.05);letter-spacing:-2px;pointer-events:none;white-space:nowrap;}
+.header-inner{max-width:1080px;margin:0 auto;}
+.brand-line{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+.brand-name{font-family:'Noto Serif KR',serif;font-size:11px;font-weight:400;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+.brand-sep{width:32px;height:1px;background:var(--gold);opacity:.35;}
+.brand-doc{font-family:'Noto Sans KR',sans-serif;font-size:10px;font-weight:300;letter-spacing:3px;color:rgba(201,169,110,.55);text-transform:uppercase;}
+header h1{font-family:'Noto Serif KR',serif;font-size:clamp(30px,4.5vw,48px);font-weight:600;color:var(--white);line-height:1.15;letter-spacing:-.5px;margin-bottom:14px;}
+.header-desc{font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:300;color:rgba(221,213,200,.65);letter-spacing:.2px;line-height:1.7;max-width:440px;}
+
+/* CONTROLS */
+.controls{background:var(--white);border-bottom:1px solid var(--border);padding:0 48px;position:sticky;top:0;z-index:200;box-shadow:0 2px 16px rgba(44,26,14,.06);}
+.controls-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:16px;min-height:58px;flex-wrap:wrap;padding:10px 0;}
+.search-wrap{position:relative;flex:1;min-width:200px;}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:13px;height:13px;opacity:.35;pointer-events:none;}
+#search{width:100%;height:36px;padding:0 13px 0 36px;border:1px solid var(--border);border-radius:3px;font-size:13px;font-family:'Noto Sans KR',sans-serif;font-weight:300;background:var(--bg);color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;letter-spacing:.2px;}
+#search::placeholder{color:var(--muted);opacity:.55;}
+#search:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,110,.1);}
+.chips{display:flex;gap:5px;flex-wrap:wrap;}
+.chip{height:30px;padding:0 12px;border:1px solid var(--border);border-radius:2px;font-size:11px;font-family:'Noto Sans KR',sans-serif;font-weight:400;cursor:pointer;background:transparent;color:var(--muted);white-space:nowrap;letter-spacing:.2px;transition:all .15s;}
+.chip:hover{border-color:var(--gold);color:var(--brown2);}
+.chip.on{background:var(--brown);border-color:var(--brown);color:var(--white);}
+.chip.on-fail{background:var(--fail);border-color:var(--fail);color:var(--white);}
+.chip.on-cond{background:var(--cond);border-color:var(--cond);color:var(--white);}
+.chip.on-ok{background:var(--ok);border-color:var(--ok);color:var(--white);}
+.chip.on-best{background:var(--best);border-color:var(--best);color:var(--white);}
+
+/* BODY */
+.body{max-width:1080px;margin:0 auto;padding:0 48px 80px;}
+.meta-row{display:flex;align-items:center;justify-content:space-between;padding:22px 0 0;margin-bottom:4px;}
+.count{font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:300;color:var(--muted);letter-spacing:.4px;}
+.legend{display:flex;gap:18px;flex-wrap:wrap;padding:12px 0 18px;border-bottom:1px solid var(--border);margin-bottom:6px;}
+.legend-item{display:flex;align-items:center;gap:7px;font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:300;color:var(--muted);}
+.leg-pill{height:16px;padding:0 7px;border-radius:2px;font-size:10px;font-weight:500;display:flex;align-items:center;font-family:'Noto Sans KR',sans-serif;}
+
+/* BANNERS */
+.info-banner{margin-top:28px;background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:3px;padding:14px 18px;}
+.info-banner-title{font-family:'Noto Serif KR',serif;font-size:12px;font-weight:600;color:var(--brown);margin-bottom:6px;letter-spacing:.3px;}
+.info-banner-text{font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:300;color:var(--brown2);line-height:1.75;}
+.best-banner{margin-top:28px;background:var(--best-bg);border:1px solid rgba(58,74,107,.18);border-left:3px solid var(--best);border-radius:3px;padding:14px 18px;display:flex;align-items:flex-start;gap:14px;}
+.best-banner-label{font-family:'Noto Serif KR',serif;font-size:11px;font-weight:600;color:var(--best);letter-spacing:1px;white-space:nowrap;padding-top:1px;}
+.best-banner-text{font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:300;color:var(--best);line-height:1.7;opacity:.8;}
+
+/* SECTION */
+.section{margin-top:36px;}
+.section-header{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;padding-bottom:11px;border-bottom:1px solid var(--border);}
+.section-num{font-family:'Noto Serif KR',serif;font-size:10px;font-weight:400;color:var(--gold);letter-spacing:2.5px;}
+.section-title{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:600;color:var(--brown);letter-spacing:-.3px;}
+.section-count{font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:300;color:var(--muted);margin-left:auto;}
+
+/* GRID & CARD */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:11px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:3px;padding:20px 22px;transition:box-shadow .2s,border-color .2s;position:relative;}
+.card::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:var(--gold);transition:height .22s ease;border-radius:3px 0 0 3px;}
+.card:hover{box-shadow:0 4px 20px rgba(44,26,14,.08);border-color:var(--gold2);}
+.card:hover::before{height:100%;}
+.card.best-card::before{height:100%;background:var(--best);}
+.card.best-card{border-color:rgba(58,74,107,.2);}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px;}
+.card-name{font-family:'Noto Serif KR',serif;font-size:16px;font-weight:600;color:var(--brown);line-height:1.25;letter-spacing:-.2px;}
+.badge{font-size:10px;font-weight:500;font-family:'Noto Sans KR',sans-serif;padding:4px 9px;border-radius:2px;white-space:nowrap;flex-shrink:0;letter-spacing:.2px;}
+.badge-fail{background:var(--fail-bg);color:var(--fail);}
+.badge-cond{background:var(--cond-bg);color:var(--cond);}
+.badge-ok{background:var(--ok-bg);color:var(--ok);}
+.badge-best{background:var(--best-bg);color:var(--best);}
+.card-year{font-family:'Noto Sans KR',sans-serif;font-size:10px;font-weight:300;color:var(--gold);letter-spacing:.4px;margin-bottom:4px;}
+.card-synth{font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:300;color:var(--muted);line-height:1.65;padding-bottom:11px;border-bottom:1px solid var(--bg2);margin-bottom:11px;}
+.card-desc{font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:300;color:var(--brown2);line-height:1.8;margin-bottom:11px;}
+.card-note{font-family:'Noto Sans KR',sans-serif;font-size:11.5px;font-weight:300;color:var(--brown2);background:var(--bg2);border-left:2px solid var(--gold);padding:9px 12px;line-height:1.65;margin-bottom:11px;}
+.tags{display:flex;gap:4px;flex-wrap:wrap;}
+.tag{font-family:'Noto Sans KR',sans-serif;font-size:10px;font-weight:300;padding:3px 7px;border:1px solid var(--border);color:var(--muted);border-radius:2px;}
+
+.empty{grid-column:1/-1;padding:60px 20px;text-align:center;}
+.empty-title{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:600;color:var(--brown2);margin-bottom:8px;}
+.empty-desc{font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:300;color:var(--muted);}
+
+footer{background:var(--brown);padding:26px 48px;}
+.footer-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.footer-brand{font-family:'Noto Serif KR',serif;font-size:13px;font-weight:600;color:var(--gold);letter-spacing:2.5px;}
+.footer-note{font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:300;color:rgba(221,213,200,.35);letter-spacing:.3px;}
+
+@media(max-width:700px){
+  header,.controls,.body,footer{padding-left:20px;padding-right:20px;}
+  header::after{display:none;}
+  .grid{grid-template-columns:1fr;}
+  .footer-inner{flex-direction:column;gap:6px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand-line">
+      <span class="brand-name">The Pantry</span>
+      <span class="brand-sep"></span>
+      <span class="brand-doc">기준 문서</span>
+    </div>
+    <h1>인공감미료<br>기준표</h1>
+    <p class="header-desc">성분표에서 이 이름이 보이면 — 더 팬트리 기준으로 바로 확인하세요</p>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 16 16" fill="none">
+        <circle cx="6.5" cy="6.5" r="5" stroke="#2C1A0E" stroke-width="1.4"/>
+        <path d="M10.5 10.5L14 14" stroke="#2C1A0E" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <input type="text" id="search" placeholder="성분명 검색 (예: 에리스리톨, 수크랄로스...)" oninput="render()">
+    </div>
+    <div class="chips">
+      <button class="chip on"  data-f="all"    onclick="setFilter(this)">전체</button>
+      <button class="chip"     data-f="현재최선"  onclick="setFilter(this)">현재 최선</button>
+      <button class="chip"     data-f="합성"    onclick="setFilter(this)">합성</button>
+      <button class="chip"     data-f="당알코올"  onclick="setFilter(this)">당알코올</button>
+      <button class="chip"     data-f="천연"    onclick="setFilter(this)">천연 유래</button>
+      <button class="chip"     data-f="❌"      onclick="setFilter(this)">❌ 비통과</button>
+      <button class="chip"     data-f="⚠️"      onclick="setFilter(this)">⚠️ 조건부</button>
+      <button class="chip"     data-f="🟡"      onclick="setFilter(this)">🟡 데이터 부족</button>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="meta-row"><span class="count" id="count"></span></div>
+  <div class="legend">
+    <div class="legend-item"><span class="leg-pill" style="background:var(--best-bg);color:var(--best);">현재 최선</span>지금 선택지 중 가장 클린</div>
+    <div class="legend-item"><span class="leg-pill badge-ok">🟡 데이터 부족</span>장기 연구 필요, 차선</div>
+    <div class="legend-item"><span class="leg-pill badge-cond">⚠️ 조건부</span>소량·단기 허용</div>
+    <div class="legend-item"><span class="leg-pill badge-fail">❌ 비통과</span>권장하지 않음</div>
+  </div>
+  <div id="root"></div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">THE PANTRY</span>
+    <span class="footer-note">내부 기준 문서 · 무단 배포 금지</span>
+  </div>
+</footer>
+
+<script>
+const DATA=[
+  // ── 합성 감미료 ──
+  {name:"사카린",year:"1879년 발견 / 1907년 상업화",type:"합성 감미료",synth:"석유 유래 톨루엔을 산화·반응시켜 합성. 자연계에 존재하지 않는 물질.",grade:"❌",best:false,
+   desc:"가장 오래되고 저렴한 합성 감미료. 쓴 뒷맛이 있음. 방광암 논란이 있었으나 현재는 허용. 저가 제품에서 주로 사용.",note:"",tags:["저가 제품","쓴 뒷맛","가장 오래됨"]},
+  {name:"아스파탐",year:"1965년 발견 / 1981년 허가",type:"합성 감미료",synth:"아스파르트산 + 페닐알라닌 두 아미노산을 화학적으로 결합. 각 아미노산은 자연에 존재하지만 결합 방식 자체가 인공.",grade:"❌",best:false,
+   desc:"식품 산업에서 가장 많이 사용. 열에 불안정해 가열 식품에 부적합. WHO 발암가능물질 2B군 분류(2023). 장내세균 변화 연구 있음.",note:"페닐케톤뇨증 환자 반드시 금지",tags:["가장 많이 쓰임","WHO 2B군","열에 약함"]},
+  {name:"아세설팜칼륨 (Ace-K)",year:"1967년 발견 / 1988년 허가",type:"합성 감미료",synth:"아세토아세트산과 황산을 반응시켜 합성. 완전 인공 분자.",grade:"❌",best:false,
+   desc:"단독보다 혼합 사용이 대부분. 열에 안정적. 쓴맛 보정용으로 다른 감미료와 세트로 들어옴. 장내세균·인슐린 반응 연구 있음.",note:"성분표에 'Ace-K' 또는 '아세설팜칼륨'으로 표기됨",tags:["혼합 사용 多","열에 안정","쓴맛 보정"]},
+  {name:"수크랄로스",year:"1976년 발견 / 1998년 허가",type:"합성 감미료",synth:"설탕에서 출발하지만, 수산기(-OH) 3개를 염소 원자로 화학 치환. 설탕이 원료일 뿐 결과물은 자연에 없는 구조.",grade:"❌",best:false,
+   desc:"열에 안정적 → 베이킹 제품에 많이 사용. 체내 흡수 안 된다고 알려졌으나 장내세균 변화·인슐린 반응 유발 가능성 연구 있음.",note:"가열 시 염소 화합물 생성 가능성 연구 있음",tags:["베이킹용","열에 안정","염소 치환"]},
+  {name:"사이클라메이트",year:"1937년 발견 / 1969년 미국 금지",type:"합성 감미료",synth:"사이클로헥실아민을 설폰화 반응시켜 합성. 완전 인공 구조.",grade:"❌",best:false,
+   desc:"미국·유럽 일부 금지. 한국은 현재 허용. 방광암 동물실험 결과로 금지됨. 저가 음료에 주로 사용.",note:"국가마다 허용 여부 다름 — 수입 제품 주의",tags:["미국 금지","저가 음료","방광암 논란"]},
+  {name:"네오탐",year:"2002년 허가",type:"합성 감미료",synth:"아스파탐 구조에 알킬 사슬을 추가 합성. 아스파탐보다 안정적으로 설계된 2세대 합성 감미료.",grade:"❌",best:false,
+   desc:"아스파탐보다 수천 배 강한 단맛 → 극소량만 사용. 성분표에서 찾기 어려움. 장내세균 유해 영향 연구 있음.",note:"극소량이라 성분표에 누락되는 경우 있음",tags:["극소량 사용","찾기 어려움","아스파탐 계열"]},
+  {name:"아드반탐",year:"2014년 허가",type:"합성 감미료",synth:"아스파탐에 이소발데르알데히드를 추가 반응시켜 합성. 가장 최근 승인된 합성 구조.",grade:"❌",best:false,
+   desc:"설탕보다 2만 배 이상 단맛. 아직 사용 드묾. 장기 연구 부족.",note:"아스파탐 계열 최신 버전",tags:["신규","극소량","장기연구 부족"]},
+  {name:"네오헤스페리딘 DC",year:"1960년대 발견 / EU 허가",type:"합성 감미료",synth:"감귤류 껍질의 쓴맛 성분(네오헤스페리딘)을 수소화·화학 변형. 천연 원료에서 출발하지만 자연에 없는 구조로 변형.",grade:"❌",best:false,
+   desc:"감귤 유래지만 합성 과정을 거쳐 완전히 다른 분자. 박하·멘톨 유사한 뒷맛. 국내는 드물고 EU에서 주로 사용.",note:"'천연'처럼 보이지만 실질적으로 반합성 감미료",tags:["반합성","EU 사용","멘톨 뒷맛"]},
+
+  // ── 당알코올 ──
+  {name:"에리스리톨",year:"1990년대 상업화",type:"당알코올",synth:"포도당을 효모(Moniliella pollinis 등)로 발효해 추출. 발효라는 점에서 가장 자연에 가깝지만, 대량 생산 과정에서 정제·농축됨.",grade:"⚠️",best:false,
+   desc:"혈당 거의 안 올림. 가장 많이 쓰이는 당알코올. 2023년 심혈관 혈전 위험 연구로 논란 중. 대량 섭취 시 복부팽만. 장내세균 구성에 영향 준다는 연구 있음.",note:"★ 혈전이란? 혈관 안에서 피가 굳는 것. 심근경색·뇌졸중 위험이 높아질 수 있음",tags:["혈당 안 올림","혈전 연구(2023)","복부팽만"]},
+  {name:"자일리톨",year:"1891년 발견 / 1970년대 상업화",type:"당알코올",synth:"자작나무 껍질·옥수수 속대에서 자일란을 추출한 뒤 수소화 반응으로 전환. 자연에도 소량 존재하나 식품에 쓰이는 양은 공업적 생산.",grade:"⚠️",best:false,
+   desc:"치아 건강에 좋다고 알려짐. 과량 섭취 시 설사. 개에게 독성. 장내세균 중 일부 유익균 성장 억제 연구 있음.",note:"반려동물 있다면 각별히 주의",tags:["치아 건강","설사 주의","개 독성"]},
+  {name:"소르비톨",year:"1900년대 / 수소화 반응으로 대량 생산",type:"당알코올",synth:"포도당에 고압 수소를 결합(수소화)해 전환. 자연에도 사과·배 등 과일에 소량 존재.",grade:"❌",best:false,
+   desc:"가장 저렴한 당알코올. 복통·설사 가장 잘 유발. 혈당도 어느 정도 올림. 장내 발효가 강해 가스 생성이 심함.",note:"★ 무설탕 껌·사탕 먹고 배탈 난 경험 = 대부분 소르비톨·말티톨이 원인",tags:["저가 제품","설사 주의","혈당 영향"]},
+  {name:"말티톨",year:"1990년대 상업화",type:"당알코올",synth:"맥아당(말토스)을 수소화해 전환. 소르비톨과 동일한 공법이지만 원료가 다름.",grade:"❌",best:false,
+   desc:"저가 무설탕 초콜릿·과자에 가장 많이 사용. 복통·설사 유발. '무설탕'이지만 혈당 지수가 당알코올 중 가장 높은 편. 장내 발효가 강함.",note:"★ 무설탕 초콜릿 먹고 배탈 = 거의 말티톨. 혈당도 올림",tags:["무설탕 초콜릿","혈당 높음","설사 주의"]},
+  {name:"만니톨",year:"자연계 존재 / 수소화로 대량 생산",type:"당알코올",synth:"과당 수소화 반응으로 대량 생산. 해조류·버섯에 자연 존재하지만 식품 첨가용은 공업 생산.",grade:"❌",best:false,
+   desc:"소르비톨과 유사. 삼투성 설사 잘 유발. 식품보다 의약품(이뇨제·뇌압 조절)에서 많이 사용. 장내 흡수율 낮아 발효 강함.",note:"의약품에서 더 자주 등장",tags:["의약품","설사 주의","삼투성"]},
+  {name:"락티톨",year:"1980년대 상업화",type:"당알코올",synth:"유당(락토스)을 수소화해 전환. 유제품 가공 부산물에서 출발.",grade:"❌",best:false,
+   desc:"유당에서 만들어지지만 유당불내증 환자에게도 영향 줄 수 있음. 하제(변비약) 성분으로도 사용. 장내 발효가 매우 강해 가스·복통 유발.",note:"변비약에 들어있는 성분이기도 함 — 과량 주의",tags:["유당 유래","강한 발효","변비약 성분"]},
+  {name:"이소말트",year:"1980년대 상업화",type:"당알코올",synth:"설탕을 효소로 이성화한 뒤 수소화. 2단계 공정.",grade:"⚠️",best:false,
+   desc:"혈당 영향 낮음. 설탕공예·사탕류에 많이 사용. 과량 섭취 시 소화 불편. 당알코올 중 비교적 장 자극이 약한 편.",note:"설탕공예 재료에서 자주 등장",tags:["제과용","혈당 낮음","소화 불편"]},
+  {name:"폴리글리시톨시럽 (HSH)",year:"1970년대 상업화",type:"당알코올",synth:"전분을 부분 가수분해한 뒤 수소화. 여러 당알코올의 혼합물 형태.",grade:"❌",best:false,
+   desc:"여러 당알코올이 혼합된 시럽 형태. 제과·껌·캔디에 사용. 혈당 일부 올림. 소화 불편·설사 유발 가능.",note:"성분표에 '수소화전분가수분해물' 또는 'HSH'로 표기됨",tags:["혼합물","제과용","설사 주의"]},
+
+  // ── 천연 유래 ──
+  {name:"스테비아",year:"1970년대 일본 상업화",type:"천연 유래",synth:"스테비아 잎에서 스테비올 배당체를 열수 추출 → 정제·농축. 추출 과정은 자연에 가깝지만 순도 높이는 정제 단계가 있음.",grade:"⚠️",best:false,
+   desc:"식물 추출이라 '천연' 이미지. 혈당 안 올림. 인슐린 저항성 우려 연구 있음. 쓴 뒷맛 있음. 장내세균 구성 변화 연구 있음.",note:"★ 인슐린 저항성이란? 인슐린이 점점 더 많이 필요해지는 상태. 살이 더 잘 찌고 포만감 신호가 무뎌질 수 있음",tags:["천연 이미지","쓴 뒷맛","인슐린 연구"]},
+  {name:"나한과 (몽크프루트)",year:"2010년대 본격 상업화",type:"천연 유래",synth:"나한과 열매에서 모그로사이드를 열수 추출 → 정제. 스테비아와 유사한 공정. 화학적 변형 없이 추출만 함.",grade:"🟡",best:true,
+   desc:"현재 선택지 중 가장 클린한 옵션. 비싸서 단독 사용은 드물고 에리스리톨과 혼합이 대부분. 장기 연구 부족.",note:"'나한과+에리스리톨' 혼합 제품이 대부분 — 에리스리톨 연구 동반 주의",tags:["현재 최선","혼합 사용","장기연구 부족"]},
+  {name:"알룰로스",year:"1990년대 발견 / 2010년대 상업화",type:"천연 유래",synth:"무화과·건포도에 극소량 자연 존재. 식품용은 과당을 효소(에피머라제)로 이성화해 생산. 효소 사용이지만 화학적 구조 변환이 일어남.",grade:"🟡",best:false,
+   desc:"설탕과 맛이 가장 유사. 혈당 거의 안 올림. 요즘 많이 보이는 추세. 장기 데이터 부족.",note:"자연에 존재하는 당이지만 대량 생산은 효소 전환 공정",tags:["설탕 유사","혈당 안 올림","장기연구 부족"]},
+  {name:"타가토스",year:"2001년 허가",type:"천연 유래",synth:"유청(乳淸)에서 유당을 분리 → 효소로 갈락토스 전환 → 다시 효소로 타가토스로 이성화. 다단계 효소 공정.",grade:"🟡",best:false,
+   desc:"낮은 혈당 지수. 아직 사용이 드묾. 장기 데이터 부족. 국내 유통 제품에서 보기 어려움.",note:"아직 국내에선 낯선 성분",tags:["유제품 유래","장기연구 부족","드묾"]},
+  {name:"트레할로스",year:"1990년대 상업화",type:"천연 유래",synth:"전분을 특수 효소(말토올리고실 트레할로스 생성효소 등)로 처리해 전환. 효모·버섯에 자연 존재하나 식품용은 효소 생산.",grade:"⚠️",best:false,
+   desc:"설탕보다 단맛이 낮음. 식품의 보습·질감 개선 용도로 주로 사용. 혈당 어느 정도 올림. 특정 유해균 증식 연구 있음.",note:"★ 특정 장내 유해균(C. difficile)이 트레할로스를 먹이로 과증식한다는 연구 있음",tags:["보습·질감","혈당 영향","유해균 연구"]},
+  {name:"토마틴 (Thaumatin)",year:"1970년대 발견 / EU 허가",type:"천연 유래",synth:"서아프리카 카템페(Thaumatococcus daniellii) 열매에서 단백질 추출. 화학 변형 없이 추출만 함. 가장 자연에 가까운 감미료 중 하나.",grade:"🟡",best:true,
+   desc:"단백질 감미료. 설탕보다 2000배 단맛. 열에 비교적 안정. 국내에서는 매우 드묾. 장기 데이터 부족하지만 알려진 독성 없음. 추출 공정만 거치며 화학 변형 없음.",note:"EU에서는 허가됐지만 국내 유통 제품에서는 거의 못 봄",tags:["단백질 감미료","추출 공정만","드묾"]},
+  {name:"글리시리진 (감초추출물)",year:"고대부터 사용 / 정제 상업화",type:"천연 유래",synth:"감초 뿌리에서 열수 추출 → 정제. 화학 변형 없이 추출·농축.",grade:"❌",best:false,
+   desc:"감초 특유의 풍미 있음. 추출 공정은 클린하지만 부작용이 명확해 비통과.\n① 고혈압 유발 — 코르티솔 대사를 방해해 혈압 상승\n② 저칼륨혈증 — 칼륨 수치 저하, 근육 경련·피로 유발 가능\n③ 부종 — 나트륨 저류로 몸이 붓는 증상\n④ 임산부 주의 — 조기 진통 관련 연구 있음\n⑤ 축적 독성 — 소량이라도 반복 섭취 시 위 증상 나타날 수 있음",note:"★ 냉증·부종·혈압 관리가 필요한 분들은 특히 주의. 성분표에 '감초추출물'로 표기됨",tags:["추출 공정 클린","명확한 부작용","혈압·부종 주의"]}
+];
+
+const SEC_INFO={
+  "합성 감미료":"자연계에 존재하지 않는 구조를 화학적으로 합성하거나, 천연 물질을 원료로 하더라도 자연에 없는 분자로 변형한 것입니다. 단맛이 매우 강해 극소량만 사용되며, 체내 대사 경로가 불분명한 경우가 많습니다.",
+  "당알코올":"설탕·포도당 등을 수소화 반응으로 변형한 것입니다. 자연에도 과일·버섯에 소량 존재하지만, 식품 첨가용은 거의 공업적으로 생산됩니다. 장에서 완전 흡수가 안 되기 때문에 혈당을 덜 올리는 대신, 대장까지 내려가 장내 미생물의 먹이가 됩니다. 이 과정에서 가스·복통·설사가 생기고, 장내 미생물 구성 자체를 바꿀 수 있다는 연구가 있습니다.",
+  "천연 유래":"식물·과일·미생물에서 추출하거나 효소로 전환해 만듭니다. '천연'이라는 표현이 붙지만, 실제로는 정제·농축·효소 변환 등의 공정을 거칩니다. 원물을 그대로 먹는 것과는 다릅니다. 다만 화학 합성보다는 인체에 친숙한 구조를 가지는 경우가 많습니다."
+};
+
+const SECTIONS=[
+  {label:"현재 최선",num:"00",key:"현재최선",isBest:true},
+  {label:"합성 감미료",num:"01",key:"합성"},
+  {label:"당알코올",num:"02",key:"당알코올"},
+  {label:"천연 유래",num:"03",key:"천연"}
+];
+
+const BADGE={"❌":["badge-fail","❌ 비통과"],"⚠️":["badge-cond","⚠️ 조건부"],"🟡":["badge-ok","🟡 데이터 부족"]};
+let active='all';
+
+function setFilter(btn){
+  active=btn.dataset.f;
+  document.querySelectorAll('.chip').forEach(b=>{
+    b.className='chip';
+    if(b===btn){
+      if(active==='❌') b.classList.add('on-fail');
+      else if(active==='⚠️') b.classList.add('on-cond');
+      else if(active==='🟡') b.classList.add('on-ok');
+      else if(active==='현재최선') b.classList.add('on-best');
+      else b.classList.add('on');
+    }
+  });
+  render();
+}
+
+function matches(d){
+  const q=document.getElementById('search').value.toLowerCase().replace(/\s/g,'');
+  const inQ=!q||[d.name,d.desc,...d.tags].some(s=>s.replace(/\s/g,'').toLowerCase().includes(q));
+  const inF=active==='all'||(active==='현재최선'&&d.best)||d.type.includes(active)||d.grade===active;
+  return inQ&&inF;
+}
+
+function cardHtml(d){
+  const[bc,bl]=d.best?['badge-best','현재 최선']:BADGE[d.grade];
+  return`<div class="card${d.best?' best-card':''}">
+    <div class="card-top"><div class="card-name">${d.name}</div><span class="badge ${bc}">${bl}</span></div>
+    <div class="card-year">${d.year}</div>
+    <div class="card-synth">${d.synth}</div>
+    <div class="card-desc">${d.desc}</div>
+    ${d.note?`<div class="card-note">${d.note}</div>`:''}
+    <div class="tags">${d.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+  </div>`;
+}
+
+function render(){
+  let total=0,html='';
+  for(const sec of SECTIONS){
+    let items;
+    if(sec.isBest){
+      if(active!=='all'&&active!=='현재최선') continue;
+      items=DATA.filter(d=>d.best&&matches(d));
+    } else {
+      if(active==='현재최선') continue;
+      items=DATA.filter(d=>d.type.includes(sec.key)&&matches(d));
+    }
+    if(!items.length) continue;
+    total+=items.length;
+
+    const bannerHtml=sec.isBest
+      ?`<div class="best-banner"><span class="best-banner-label">더 팬트리 기준</span><span class="best-banner-text">장기 임상 데이터가 아직 부족하지만, 지금 선택지 중 가장 클린한 것들입니다. 완전한 안전을 보장하지는 않으며, 계속 업데이트됩니다.</span></div>`
+      :SEC_INFO[sec.label]
+        ?`<div class="info-banner"><div class="info-banner-title">${sec.label}이란?</div><div class="info-banner-text">${SEC_INFO[sec.label]}</div></div>`
+        :'';
+
+    html+=`<div class="section">
+      <div class="section-header">
+        <span class="section-num">${sec.num}</span>
+        <span class="section-title">${sec.label}</span>
+        <span class="section-count">${items.length}개</span>
+      </div>
+      ${bannerHtml}
+      <div class="grid" style="margin-top:14px;">
+        ${items.map(cardHtml).join('')}
+      </div>
+    </div>`;
+  }
+  if(!total) html=`<div class="grid"><div class="empty"><div class="empty-title">검색 결과가 없어요</div><div class="empty-desc">다른 키워드로 검색해보세요</div></div></div>`;
+  document.getElementById('root').innerHTML=html;
+  document.getElementById('count').textContent=`총 ${total}개`;
+}
+
+render();
+if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
+</body>
+</html>
