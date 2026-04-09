@@ -2,14 +2,12 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#363636">
 <meta name="description" content="더 팬트리 인공감미료 기준표 — 성분표에서 이 이름이 보이면 바로 확인하세요">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="팬트리 기준표">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
 <title>인공감미료 기준표 — THE PANTRY</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
@@ -40,7 +38,7 @@ header h1{font-family:'Pretendard',-apple-system,sans-serif;font-size:clamp(30px
 #search::placeholder{color:var(--gy);opacity:.55;}
 #search:focus{border-color:var(--ye);box-shadow:0 0 0 3px rgba(184,201,110,.1);}
 .chips{display:flex;gap:5px;flex-wrap:wrap;}
-.chip{height:30px;padding:0 12px;border:1px solid var(--bor);border-radius:2px;font-size:11px;font-family:'Pretendard',-apple-system,sans-serif;font-weight:400;cursor:pointer;background:transparent;color:var(--gy);white-space:nowrap;letter-spacing:.2px;transition:all .15s;}
+.chip{min-height:44px;padding:0 14px;border:1px solid var(--bor);border-radius:2px;font-size:11px;font-family:'Pretendard',-apple-system,sans-serif;font-weight:400;cursor:pointer;background:transparent;color:var(--gy);white-space:nowrap;letter-spacing:.2px;transition:all .15s;}
 .chip:hover{border-color:var(--ye);color:var(--gr2);}
 .chip.on{background:var(--gr);border-color:var(--gr);color:var(--card);}
 .chip.on-fail{background:var(--fail);border-color:var(--fail);color:var(--card);}
@@ -102,11 +100,55 @@ footer{background:var(--gr);padding:26px 48px;}
 .footer-brand{font-family:'Pretendard',-apple-system,sans-serif;font-size:13px;font-weight:600;color:var(--ye);letter-spacing:2.5px;}
 .footer-note{font-family:'Pretendard',-apple-system,sans-serif;font-size:11px;font-weight:400;color:rgba(232,232,232,.35);letter-spacing:.3px;}
 
+@supports(padding:env(safe-area-inset-top)){
+  header{padding-top:calc(40px + env(safe-area-inset-top));}
+  header,.controls,.body,footer{padding-left:calc(48px + env(safe-area-inset-left));padding-right:calc(48px + env(safe-area-inset-right));}
+  footer{padding-bottom:calc(26px + env(safe-area-inset-bottom));}
+}
 @media(max-width:700px){
   header,.controls,.body,footer{padding-left:20px;padding-right:20px;}
   header::after{display:none;}
   .grid{grid-template-columns:1fr;}
   .footer-inner{flex-direction:column;gap:6px;text-align:center;}
+
+  /* 헤더 컴팩트 */
+  header{padding-top:24px;padding-bottom:20px;}
+  .brand-line{margin-bottom:14px;}
+  header h1{margin-bottom:6px;}
+  .header-desc{margin-bottom:4px;font-size:14px;}
+
+  /* 컨트롤바 수직 배치 */
+  .controls-inner{flex-direction:column;align-items:stretch;gap:8px;min-height:auto;padding:8px 0;}
+  .search-wrap{min-width:0;flex:none;}
+
+  /* 칩 가로 스크롤 */
+  .chips{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;}
+  .chips::-webkit-scrollbar{display:none;}
+
+  /* 폰트 크기 */
+  .card-desc{font-size:14px;line-height:1.85;}
+  .card-name{font-size:17px;}
+  .card-synth{font-size:12px;}
+  .card-note{font-size:12px;}
+  .header-disclaimer{font-size:12px;}
+  .section-title{font-size:18px;}
+
+  /* 카드/간격 */
+  .card{padding:16px;}
+  .grid{gap:8px;}
+  .section{margin-top:24px;}
+  .body{padding-bottom:40px;}
+
+  /* 범례 2x2 그리드 */
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;}
+  .legend-item{font-size:10px;}
+
+  /* safe area 모바일 오버라이드 */
+  @supports(padding:env(safe-area-inset-top)){
+    header{padding-top:calc(24px + env(safe-area-inset-top));}
+    header,.controls,.body,footer{padding-left:calc(20px + env(safe-area-inset-left));padding-right:calc(20px + env(safe-area-inset-right));}
+    footer{padding-bottom:calc(26px + env(safe-area-inset-bottom));}
+  }
 }
 </style>
 </head>
@@ -308,7 +350,12 @@ function render(){
 }
 
 render();
-if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+function updatePlaceholder(){
+  const s=document.getElementById('search');
+  s.placeholder=window.innerWidth<=700?'성분명 검색':'성분명 검색 (예: 에리스리톨, 수크랄로스...)';
+}
+updatePlaceholder();
+window.addEventListener('resize',updatePlaceholder);
 </script>
 </body>
 </html>
